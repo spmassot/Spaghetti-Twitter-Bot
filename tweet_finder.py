@@ -3,8 +3,7 @@ import os
 from auth import give_me_auth as auth
 
 def main():
-    api = auth()
-    return tweepy.Cursor(api.user_timeline, id='@realDonaldTrump', count=1).items(1)
+    return tweepy.Cursor(auth().user_timeline, id='@realDonaldTrump', count=1).items(1)
 
 if __name__ == '__main__':
-    main()
+    print([x for x in main()][0].text)
