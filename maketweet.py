@@ -18,11 +18,11 @@ def replace_url(in_string):
 def feed_me():
     while True:
         yield 'spaghetti'
-        yield 'meatball'
+        yield 'meatballs'
         yield 'marinara sauce'
-        yield 'parmesean'
+        yield 'parmesan'
         yield 'spicy meatball'
-    
+	
 if __name__ == '__main__':
-    print(main('GO HOME TO RUSSIA'))
+    print(main(input('Enter some text:')))
 

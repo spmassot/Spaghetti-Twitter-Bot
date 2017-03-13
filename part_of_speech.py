@@ -4,7 +4,7 @@ import requests
 
 def main(in_word):
     """Returns a tuple containing (word,part of speech)"""
-    return get_pos(request_builder(in_word).text) == 'Noun'   
+    return get_pos(request_builder(make_singular(in_word)).text) == 'Noun'   
 
 def request_builder(word):
     """Takes an input word, hits the dictionary api, and returns a response object."""
@@ -22,6 +22,13 @@ def get_pos(in_blob):
         return pos_match.search(in_blob).groupdict()['partOfSpeech']
     except:
         return 'Noap'
+
+def make_singular(in_word):
+    plural_match = re.compile('([a-zA-Z]+?)(s$|es$|$)')
+    try:
+        return plural_match.search(in_word).group(1)
+    except:
+        return in_word
     
 if __name__ == '__main__':
-    print([main(x) for x in ['tree','baseball','kick','heavy','USA','AMERICA']])
+    print([main(x) for x in ['turkey','rats','tree','flying','sword','into']])

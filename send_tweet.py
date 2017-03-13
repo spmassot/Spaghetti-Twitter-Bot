@@ -12,4 +12,4 @@ def main(in_tweet):
         api.update_status(new_twt)
 
 if __name__ == '__main__':
-    print(main('YA BOOBAY!'))
+    print(main('Ya Boobay'))
