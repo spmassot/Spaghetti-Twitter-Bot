@@ -4,16 +4,22 @@ import requests
 
 def main(in_word):
     """Returns a tuple containing (word,part of speech)"""
-    return get_pos(request_builder(make_singular(in_word)).text) == 'Noun'   
+    return get_pos(
+        request_builder(make_singular(in_word)).text
+    ) == 'Noun'   
 
 def request_builder(word):
-    """Takes an input word, hits the dictionary api, and returns a response object."""
+    """Takes an input word, hits the dictionary api, 
+    and returns a response object."""
     url = 'https://od-api.oxforddictionaries.com/api/v1'
     route = '/entries'
     full = url+route+'/en/'+word.lower()
-    return requests.get(full,
-                        headers={'app_id':os.environ['dict_app_id'],
-                                 'app_key':os.environ['dict_app_key']})
+    return requests.get(
+        full,
+        headers={
+            'app_id':os.environ['dict_app_id'],
+            'app_key':os.environ['dict_app_key']
+    })
 
 def get_pos(in_blob):
     """Takes a json blob and returns just the part of speech"""

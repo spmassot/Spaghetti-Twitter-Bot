@@ -4,8 +4,10 @@ from part_of_speech import main as pos
 
 def main(the_tweet):
     feeder = feed_me()
-    the_new_tweet = ' '.join([subber(x,feeder) if pos(x) else x 
-                              for x in the_tweet.split(' ')])
+    the_new_tweet = ' '.join(
+        [subber(x,feeder) if pos(x) else x 
+        for x in the_tweet.split(' ')]
+    )
     return replace_url(the_new_tweet)
     
 def subber(inword, food):
