@@ -2,7 +2,7 @@ import re
 import os
 import requests
 
-def main(in_word):
+def part_of_speech(in_word):
     """Returns a tuple containing (word,part of speech)"""
     return get_pos(
         request_builder(make_singular(in_word)).text
