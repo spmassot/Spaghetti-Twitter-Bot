@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "send_tweet.py",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "spaghetti-twitt",
+        "runtime": "python3.6",
+        "s3_bucket": "some-s3-bucket"
+    }
+}
