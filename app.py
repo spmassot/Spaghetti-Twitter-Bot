@@ -1,13 +1,22 @@
 import tweepy
 from auth import give_me_auth as auth
+from send_tweet import main as send_tweet
 from tweet_finder import tweet_finder as finder
-from maketweet import tweet_maker
+from models.tweetlog import get_last_tweet, update_tweet_log
 
-def tweet_finder():
-    return tweepy.Cursor(
-        auth().user_timeline,
-        id='@realDonaldTrump',
-        count=1
-    ).items(1)
+def check_go(in_tweet):
+    if in_tweet.id > get_last_tweet():
+        return True
+    else:
+        return False
 
-def
+def main():
+    new_tweet = finder()
+    if check_go(new_tweet):
+        send_tweet(new_tweet)
+        update_tweet_log(new_tweet)
+    else:
+        return
+
+if __name__ == '__main__':
+    main()

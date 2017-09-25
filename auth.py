@@ -22,5 +22,5 @@ def give_me_auth_too():
 
 
 if __name__ == "__main__":
-    api = auth_and_tweet()
+    api = give_me_auth()
     api.update_status('Hello Big Meatball!')

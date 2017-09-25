@@ -1,7 +1,7 @@
 import re
 import tweepy
 from auth import give_me_auth as auth
-from maketweet import main as mktwt
+from maketweet import tweet_maker as mktwt
 
 def main(in_tweet):
     api = auth()

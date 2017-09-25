@@ -2,3 +2,4 @@ vnv
 .env
 __pycache__
 zappa_settings.json
+project_credentials.json

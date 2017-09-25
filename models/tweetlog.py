@@ -11,7 +11,7 @@ class TweetLog(Model):
 
     last_tweet_id = NumberAttribute(hash_key=True)
 
-def update_tweet(new_tweet_id):
+def update_tweet_log(new_tweet_id):
     if not TweetLog.exists():
         TweetLog.create_table()
 
@@ -34,6 +34,6 @@ def get_last_tweet():
         return [x.last_tweet_id for x in TweetLog.scan()][0]
 
 if __name__ == '__main__':
-    print(update_tweet(0))
-    print(update_tweet(1))
-    print(update_tweet(2))
+    print(update_tweet_log(0))
+    print(update_tweet_log(1))
+    print(update_tweet_log(2))
