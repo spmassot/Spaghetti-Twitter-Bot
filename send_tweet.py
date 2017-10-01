@@ -19,4 +19,7 @@ def main(in_tweet):
         api.update_status(new_twt)
 
 if __name__ == '__main__':
-    print(main('Ya Boobay'))
+    text= 'Making America safe is my number one priority.'
+    'We will not admit those into our country we cannot safely vet.'
+    print(main(text))
+

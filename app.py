@@ -1,4 +1,5 @@
 import tweepy
+from tweepy.error import TweepError
 from auth import give_me_auth as auth
 from send_tweet import main as send_tweet
 from tweet_finder import tweet_finder as finder
@@ -13,10 +14,15 @@ def check_go(in_tweet):
 def main():
     new_tweet = finder()
     if check_go(new_tweet):
-        send_tweet(new_tweet)
-        update_tweet_log(new_tweet)
+        try:
+            send_tweet(new_tweet)
+        except TweepError:
+            update_tweet_log(new_tweet.id)
+        else:
+            update_tweet_log(new_tweet.id)
     else:
         return
 
 if __name__ == '__main__':
     main()
+
