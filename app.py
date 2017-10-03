@@ -7,9 +7,7 @@ from auth import give_me_auth as auth
 from send_tweet import main as send_tweet
 from tweet_finder import tweet_finder as finder
 from models.tweetlog import get_last_tweet, update_tweet_log
-from flask import Flask
 
-app = Flask(__name__)
 
 def check_go(in_tweet):
     if in_tweet.id > get_last_tweet():
@@ -17,7 +15,6 @@ def check_go(in_tweet):
     else:
         return False
 
-@app.route('/')
 def main():
     new_tweet = finder()
     if check_go(new_tweet):
@@ -31,5 +28,5 @@ def main():
         return
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    main()
 
