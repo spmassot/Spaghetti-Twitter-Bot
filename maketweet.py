@@ -33,7 +33,7 @@ def replace_url(in_string):
 def feed_me(subject, entity):
     return {
         'UNKNOWN':f'{subject}',
-        'PERSON':f'the {subject} man',
+        'PERSON':f'{subject} man',
         'LOCATION':f'{subject} city',
         'ORGANIZATION':f'The {subject.title()} Conservancy',
         'EVENT':f'{subject.title()} Day',
