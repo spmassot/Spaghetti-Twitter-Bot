@@ -3,6 +3,7 @@ import tweepy
 from random import choice
 from itertools import cycle
 from google_language import get_entities
+from models.corpus import update_corpus
 
 def tweet_maker(the_tweet):
     foods = cycle((
@@ -21,6 +22,7 @@ def tweet_maker(the_tweet):
     the_new_tweet = the_tweet.text
     entities = get_entities(the_tweet.text)
     for word, entity_type in entities.items():
+        update_corpus(word, entity_type)
         the_new_tweet = the_new_tweet.replace(
             word,
             choice(
