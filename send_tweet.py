@@ -5,7 +5,7 @@ from maketweet import tweet_maker as mktwt
 
 def main(in_tweet):
     api = auth()
-    new_twt = mktwt(in_tweet)
+    new_twt = mktwt(in_tweet.text)
     url = re.compile("http.+(\s|$)")
     try:
         strt = url.search(new_tweet).start()

@@ -5,7 +5,25 @@ from google_language import get_entities
 from models.corpus import update_corpus
 
 def tweet_maker(the_tweet):
-    foods = (
+    entities = get_entities(the_tweet)
+    the_new_tweet = the_tweet
+    for word, entity_type in entities.items():
+        length = len(word)
+        update_corpus(word, entity_type)
+        the_new_tweet = the_new_tweet.replace(
+            word, choice(feed_me(choice(get_foods())[0], word, entity_type))
+        )
+    return replace_url(the_new_tweet)
+
+def replace_url(in_string):
+    url = re.compile("http.+(\s|$)")
+    return url.sub(
+        "https://www.youtube.com/watch?v=zWHu95io9B4 ",
+        in_string
+    )
+
+def get_foods():
+    return [(x,len(x)) for x in (
         'spaghetti',
         'meatballs',
         'marinara sauce',
@@ -17,22 +35,7 @@ def tweet_maker(the_tweet):
         'mozzarella',
         'bolognese',
         'parmesean'
-    )
-    the_new_tweet = the_tweet.text
-    entities = get_entities(the_tweet.text)
-    for word, entity_type in entities.items():
-        update_corpus(word, entity_type)
-        the_new_tweet = the_new_tweet.replace(
-            word, choice(feed_me(choice(foods), word, entity_type))
-        )
-    return replace_url(the_new_tweet)
-
-def replace_url(in_string):
-    url = re.compile("http.+(\s|$)")
-    return url.sub(
-        "https://www.youtube.com/watch?v=zWHu95io9B4 ",
-        in_string
-    )
+    )]
 
 def feed_me(food, origin, entity):
     return {
@@ -41,6 +44,7 @@ def feed_me(food, origin, entity):
         ],
         'PERSON':[
             f'{food} man',
+            origin,
         ],
         'LOCATION':[
             f'{food} land',
@@ -63,6 +67,8 @@ def feed_me(food, origin, entity):
         ],
         'OTHER':[
             origin,
+            f'{food}',
+            f'{food}',
         ],
     }.get(entity, f'{food}')
 
