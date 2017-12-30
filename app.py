@@ -16,6 +16,7 @@ def check_go(in_tweet):
     else:
         return False
 
+
 def main():
     new_tweet = finder()
     if check_go(new_tweet):
@@ -30,6 +31,7 @@ def main():
     else:
         log(new_tweet.id, 'has already been used.')
         return
+
 
 if __name__ == '__main__':
     main()

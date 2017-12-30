@@ -1,6 +1,7 @@
 from pynamodb.models import Model
 from pynamodb.attributes import NumberAttribute, UnicodeAttribute
 
+
 class Corpus(Model):
     """A word, its entity type, and usage statistics."""
     class Meta:
@@ -36,5 +37,9 @@ def update_corpus(new_word, entity_type):
 
 
 if __name__ == '__main__':
-    print(update_corpus('test','OTHER'))
-    print(update_corpus('test','OTHER'))
+    import csv
+    with open('corpus.csv', 'w') as csvf:
+        corpus_writer = csv.writer(csvf)
+        corpus_writer.writerow(['Word','Entity Type','Count'])
+        for i in Corpus.scan():
+            corpus_writer.writerow([i.word,i.entity_type,i.count])
