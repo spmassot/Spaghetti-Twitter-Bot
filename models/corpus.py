@@ -11,7 +11,7 @@ class Corpus(Model):
         write_capacity_units = 1
 
     word = UnicodeAttribute(hash_key=True)
-    entity_type = UnicodeAttribute()
+    entity_type = UnicodeAttribute(default='None')
     count = NumberAttribute(default=0)
 
 
@@ -26,6 +26,20 @@ def update_corpus(new_word, entity_type):
             new_word,
             entity_type=entity_type,
         )
+        new_record.save()
+        return True
+
+
+def update_count(word_or_words):
+    if isinstance(word_or_words, list):
+        return [update_count(word) for word in word_or_words]
+
+    if not Corpus.exists():
+        Corpus.create_table()
+    try:
+        existing_word = Corpus.get(word_or_words)
+    except:
+        new_record = Corpus(word_or_words)
         new_record.save()
         return True
     else:

@@ -1,18 +1,26 @@
 import re
 import tweepy
+import string
 from itertools import chain
 from random import choice
 from google_language import get_entities
-from models.corpus import update_corpus
+from models.corpus import update_corpus, update_count
 
 
 def tweet_maker(the_tweet):
     entities = get_entities(the_tweet)
     the_new_tweet = the_tweet
+    the_string = the_tweet.translate(
+        str.maketrans('','',string.punctuation)
+    ).split()
+    update_count(the_string)
+    update_count(
+        [f'{the_string[i - 1]} {x}' for i, x in enumerate(the_string)][1]
+    )
     for word, etype in entities.items():
         if word == '&amp':
             continue
-        # update_corpus(word, etype)
+        update_corpus(word, etype)
         if '@' in word:
             continue
         combos = list(chain.from_iterable(
@@ -73,6 +81,7 @@ def feed_me(food, origin, entity):
         'CONSUMER_GOOD': lambda food, orig: [f'{food}'],
         'OTHER':lambda food, orig: [ orig, f'{food}', f'{food}', ],
         }.get(entity, lambda food, orig: f'{food}')(food, origin)
+
 
 if __name__ == '__main__':
     print(tweet_maker(input('Enter some text:')))
