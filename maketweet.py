@@ -41,17 +41,14 @@ def replace_url(in_string):
 
 def get_foods():
     return [
-        'spaghetti',
-        'meatballs',
-        'marinara sauce',
-        'steak pizzaiola',
-        'baked ziti',
-        'pecorino romano',
-        'oregano',
-        'basil',
-        'mozzarella',
-        'bolognese',
-        'parmesean'
+        'spaghetti', 'meatballs',
+        'marinara sauce', 'steak pizzaiola',
+        'baked ziti', 'pecorino romano',
+        'oregano', 'basil',
+        'mozzarella', 'bolognese',
+        'parmesean', 'panettone',
+        'carbonara', 'eggplant rolitini',
+        'ricotta', 'pepperoni'
     ]
 
 
