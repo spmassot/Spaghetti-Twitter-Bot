@@ -26,7 +26,7 @@ def tweet_maker(the_tweet):
         combos = list(chain.from_iterable(
             [feed_me(food, word, etype) for food in get_foods()]
         ))
-        replacer = min(combos, key=lambda x: abs(len(x) - len(word)))
+        replacer = choice(combos)
         the_new_tweet = the_new_tweet.replace(word, replacer)
     return replace_url(the_new_tweet)
 
