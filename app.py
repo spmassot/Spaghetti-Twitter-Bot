@@ -7,7 +7,7 @@ from auth import give_me_auth as auth
 from send_tweet import main as send_tweet
 from tweet_finder import tweet_finder as finder
 from models.tweetlog import get_last_tweet, update_tweet_log
-from utilities.logger import log
+from logger import log
 
 
 def check_go(in_tweet):
