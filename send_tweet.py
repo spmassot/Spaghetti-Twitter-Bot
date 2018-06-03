@@ -18,6 +18,7 @@ def main(in_tweet):
     else:
         api.update_status(new_twt)
 
+
 if __name__ == '__main__':
     text = 'Making America safe is my number one priority.'
     'We will not admit those into our country we cannot safely vet.'

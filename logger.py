@@ -8,4 +8,3 @@ def log(msga, msgb):
         level=logging.INFO
     )
     logging.info('%s --- %s', msga, msgb)
-

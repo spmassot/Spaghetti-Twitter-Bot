@@ -1,0 +1,4 @@
+[run]
+omit = tests/*
+show_missing = True
+branch = True

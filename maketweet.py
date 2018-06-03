@@ -32,7 +32,7 @@ def tweet_maker(the_tweet):
 
 
 def replace_url(in_string):
-    url = re.compile("http.+(\s|$)")
+    url = re.compile("http.+(?=\s|$)")
     return url.sub(
         "https://www.youtube.com/watch?v=zWHu95io9B4 ",
         in_string
@@ -41,14 +41,11 @@ def replace_url(in_string):
 
 def get_foods():
     return [
-        'spaghetti', 'meatballs',
-        'marinara sauce', 'steak pizzaiola',
-        'baked ziti', 'pecorino romano',
-        'oregano', 'basil',
-        'mozzarella', 'bolognese',
-        'parmesean', 'panettone',
-        'carbonara', 'eggplant rolitini',
-        'ricotta', 'pepperoni'
+        'spaghetti', 'meatballs', 'marinara sauce', 'steak pizzaiola',
+        'baked ziti', 'pecorino romano', 'oregano', 'basil',
+        'mozzarella', 'bolognese', 'parmesean', 'panettone',
+        'carbonara', 'eggplant rolitini', 'prosciutto', 'bruschetta',
+        'ricotta', 'pepperoni', 'cappicola', 'pasta fagioli', 'tira misu'
     ]
 
 
@@ -77,7 +74,7 @@ def feed_me(food, origin, entity):
         'WORK_OF_ART': lambda food, orig: [orig],
         'CONSUMER_GOOD': lambda food, orig: [f'{food}'],
         'OTHER':lambda food, orig: [ orig, f'{food}', f'{food}', ],
-        }.get(entity, lambda food, orig: f'{food}')(food, origin)
+    }.get(entity, lambda food, orig: f'{food}')(food, origin)
 
 
 if __name__ == '__main__':

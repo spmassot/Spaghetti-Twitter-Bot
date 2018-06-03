@@ -10,16 +10,9 @@ from models.tweetlog import get_last_tweet, update_tweet_log
 from logger import log
 
 
-def check_go(in_tweet):
-    if in_tweet.id > get_last_tweet():
-        return True
-    else:
-        return False
-
-
 def main():
     new_tweet = finder()
-    if check_go(new_tweet):
+    if new_tweet.id > get_last_tweet():
         try:
             send_tweet(new_tweet)
             log(new_tweet.id, new_tweet.text)
@@ -35,4 +28,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -1,6 +1,7 @@
 from pynamodb.models import Model
 from pynamodb.attributes import NumberAttribute
 
+
 class TweetLog(Model):
     """A snapshot of the most recent tweet."""
     class Meta:
@@ -10,6 +11,7 @@ class TweetLog(Model):
         write_capacity_units = 1
 
     last_tweet_id = NumberAttribute(hash_key=True)
+
 
 def update_tweet_log(new_tweet_id):
     if not TweetLog.exists():
@@ -27,6 +29,7 @@ def update_tweet_log(new_tweet_id):
 
     return get_last_tweet()
 
+
 def get_last_tweet():
     last_tweet = [x.last_tweet_id for x in TweetLog.scan()]
     if not TweetLog.exists():
@@ -38,8 +41,3 @@ def get_last_tweet():
         return 0
     else:
         return last_tweet[0]
-
-if __name__ == '__main__':
-    print(update_tweet_log(0))
-    print(update_tweet_log(1))
-    print(update_tweet_log(2))

@@ -1,0 +1,8 @@
+[
+  "tests/test_google_language.py::test_get_sentiment",
+  "tests/test_google_language.py::test_get_entities",
+  "tests/test_maketweet.py::test_tweet_maker",
+  "tests/test_maketweet.py::test_replace_url",
+  "tests/test_maketweet.py::test_get_foods",
+  "tests/test_maketweet.py::test_feed_me"
+]
