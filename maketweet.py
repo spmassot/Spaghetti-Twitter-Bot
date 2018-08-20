@@ -28,6 +28,7 @@ def tweet_maker(the_tweet):
         ))
         replacer = choice(combos)
         the_new_tweet = the_new_tweet.replace(word, replacer)
+        the_new_tweet = the_new_tweet.replace('&amp', '&')
     return replace_url(the_new_tweet)
 
 
