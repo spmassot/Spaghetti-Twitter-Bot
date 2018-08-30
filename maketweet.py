@@ -1,4 +1,5 @@
 import re
+from os import getenv
 import string
 from itertools import chain
 from random import choice
@@ -23,7 +24,7 @@ def tweet_maker(the_tweet):
         if '@' in word:
             continue
         combos = list(chain.from_iterable(
-            [feed_me(food, word, etype) for food in get_foods()]
+            [feed_me(repl, word, etype) for repl in get_repls()]
         ))
         replacer = choice(combos)
         the_new_tweet = the_new_tweet.replace(word, replacer)
@@ -39,42 +40,36 @@ def replace_url(in_string):
     )
 
 
-def get_foods():
-    return [
-        'spaghetti', 'meatballs', 'marinara sauce', 'steak pizzaiola',
-        'baked ziti', 'pecorino romano', 'oregano', 'basil',
-        'mozzarella', 'bolognese', 'parmesean', 'panettone',
-        'carbonara', 'eggplant rolitini', 'prosciutto', 'bruschetta',
-        'ricotta', 'pepperoni', 'cappicola', 'pasta fagioli', 'tira misu'
-    ]
+def get_repls():
+    return getenv('REPLACEMENTS').split(',')
 
 
-def feed_me(food, origin, entity):
+def feed_me(repl, origin, entity):
     return {
-        'UNKNOWN': lambda food, orig: [orig],
-        'PERSON': lambda food, orig: (
-            [x.title() for x in [f'{food} man', f'{food}', orig, ]]
+        'UNKNOWN': lambda repl, orig: [orig],
+        'PERSON': lambda repl, orig: (
+            [x.title() for x in [f'{repl} man', f'{repl}', orig, ]]
             if orig.title() == orig
-            else [f'{food} man', f'{food}', orig, ]
+            else [f'{repl} man', f'{repl}', orig, ]
         ),
-        'LOCATION': lambda food, orig: (
-            [x.title() for x in [f'{food} land', f'{food} city', ]]
+        'LOCATION': lambda repl, orig: (
+            [x.title() for x in [f'{repl} land', f'{repl} city', ]]
             if orig.title() == orig
-            else [f'{food} land', f'{food} city', ]
+            else [f'{repl} land', f'{repl} city', ]
         ),
-        'ORGANIZATION': lambda food, orig: [
-            f'{food.title()} Conservancy',
-            f'Department of {food.title()}',
-            f'{food.title()} Association',
+        'ORGANIZATION': lambda repl, orig: [
+            f'{repl.title()} Conservancy',
+            f'Department of {repl.title()}',
+            f'{repl.title()} Association',
         ],
-        'EVENT': lambda food, orig: [
-            f'{food.title()} Day',
-            f'war of {food.title()}',
+        'EVENT': lambda repl, orig: [
+            f'{repl.title()} Day',
+            f'war of {repl.title()}',
         ],
-        'WORK_OF_ART': lambda food, orig: [orig],
-        'CONSUMER_GOOD': lambda food, orig: [f'{food}'],
-        'OTHER': lambda food, orig: [orig, f'{food}', f'{food}', ],
-    }.get(entity, lambda food, orig: f'{food}')(food, origin)
+        'WORK_OF_ART': lambda repl, orig: [orig],
+        'CONSUMER_GOOD': lambda repl, orig: [f'{repl}'],
+        'OTHER': lambda repl, orig: [orig, f'{repl}', f'{repl}', ],
+    }.get(entity, lambda repl, orig: f'{repl}')(repl, origin)
 
 
 if __name__ == '__main__':
