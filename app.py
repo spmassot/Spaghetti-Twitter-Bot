@@ -1,9 +1,7 @@
 #! /usr/bin/env python3
 """Spaghetti-Twitter-Bot/Flask/Zappa."""
 
-import tweepy
 from tweepy.error import TweepError
-from auth import give_me_auth as auth
 from send_tweet import main as send_tweet
 from tweet_finder import tweet_finder as finder
 from models.tweetlog import get_last_tweet, update_tweet_log

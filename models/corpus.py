@@ -20,8 +20,8 @@ def update_corpus(new_word, entity_type):
         Corpus.create_table()
 
     try:
-        existing_word = Corpus.get(new_word)
-    except:
+        Corpus.get(new_word)
+    except Exception:
         new_record = Corpus(
             new_word,
             entity_type=entity_type,
@@ -38,15 +38,16 @@ def update_count(word_or_words):
         Corpus.create_table()
     try:
         existing_word = Corpus.get(word_or_words)
-    except:
+    except Exception:
         new_record = Corpus(word_or_words)
         new_record.save()
         return True
     else:
         existing_word.update(
             attributes={
-                'count':{'value':1,'action':'ADD'},
-        })
+                'count': {'value': 1, 'action': 'ADD'},
+            }
+        )
         return False
 
 
@@ -54,6 +55,6 @@ if __name__ == '__main__':
     import csv
     with open('corpus.csv', 'w') as csvf:
         corpus_writer = csv.writer(csvf)
-        corpus_writer.writerow(['Word','Entity Type','Count'])
+        corpus_writer.writerow(['Word', 'Entity Type', 'Count'])
         for i in Corpus.scan():
-            corpus_writer.writerow([i.word,i.entity_type,i.count])
+            corpus_writer.writerow([i.word, i.entity_type, i.count])

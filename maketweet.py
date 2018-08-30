@@ -1,5 +1,4 @@
 import re
-import tweepy
 import string
 from itertools import chain
 from random import choice
@@ -11,7 +10,7 @@ def tweet_maker(the_tweet):
     entities = get_entities(the_tweet)
     the_new_tweet = the_tweet
     the_string = the_tweet.translate(
-        str.maketrans('','',string.punctuation)
+        str.maketrans('', '', string.punctuation)
     ).split()
     update_count(the_string)
     update_count(
@@ -54,14 +53,14 @@ def feed_me(food, origin, entity):
     return {
         'UNKNOWN': lambda food, orig: [orig],
         'PERSON': lambda food, orig: (
-            [x.title() for x in [ f'{food} man', f'{food}', orig, ]]
+            [x.title() for x in [f'{food} man', f'{food}', orig, ]]
             if orig.title() == orig
-            else [ f'{food} man', f'{food}', orig, ]
+            else [f'{food} man', f'{food}', orig, ]
         ),
         'LOCATION': lambda food, orig: (
-            [x.title() for x in [ f'{food} land', f'{food} city', ]]
+            [x.title() for x in [f'{food} land', f'{food} city', ]]
             if orig.title() == orig
-            else [ f'{food} land', f'{food} city', ]
+            else [f'{food} land', f'{food} city', ]
         ),
         'ORGANIZATION': lambda food, orig: [
             f'{food.title()} Conservancy',
@@ -74,10 +73,9 @@ def feed_me(food, origin, entity):
         ],
         'WORK_OF_ART': lambda food, orig: [orig],
         'CONSUMER_GOOD': lambda food, orig: [f'{food}'],
-        'OTHER':lambda food, orig: [ orig, f'{food}', f'{food}', ],
+        'OTHER': lambda food, orig: [orig, f'{food}', f'{food}', ],
     }.get(entity, lambda food, orig: f'{food}')(food, origin)
 
 
 if __name__ == '__main__':
     print(tweet_maker(input('Enter some text:')))
-

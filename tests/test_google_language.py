@@ -11,7 +11,7 @@ def test_text():
 
 
 def test_get_sentiment(test_text):
-    assert gl.get_sentiment(test_text) == (0,0)
+    assert gl.get_sentiment(test_text) == (0, 0)
 
 
 def test_get_entities(test_text):

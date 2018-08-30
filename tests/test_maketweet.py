@@ -10,14 +10,12 @@ def test_replace_url():
 
 
 def test_get_foods():
-    assert mt.get_foods() == [ 'spaghetti', 'meatballs',
-                               'marinara sauce', 'steak pizzaiola',
-                               'baked ziti', 'pecorino romano',
-                               'oregano', 'basil',
-                               'mozzarella', 'bolognese',
-                               'parmesean', 'panettone',
-                               'carbonara', 'eggplant rolitini',
-                               'ricotta', 'pepperoni' ]
+    assert mt.get_foods() == [
+        'spaghetti', 'meatballs', 'marinara sauce', 'steak pizzaiola',
+        'baked ziti', 'pecorino romano', 'oregano', 'basil', 'mozzarella',
+        'bolognese', 'parmesean', 'panettone', 'carbonara',
+        'eggplant rolitini', 'ricotta', 'pepperoni'
+    ]
 
 
 def test_feed_me():
