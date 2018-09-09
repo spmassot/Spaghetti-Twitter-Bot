@@ -32,7 +32,6 @@ def update_tweet_log(new_tweet_id):
 
 
 def get_last_tweet():
-    last_tweet = [x.last_tweet_id for x in TweetLog.scan()]
     if not TweetLog.exists():
         TweetLog.create_table()
         return 0
