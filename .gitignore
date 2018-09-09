@@ -4,4 +4,4 @@ venv
 __pycache__
 zappa_settings.json
 project_credentials.json
-app-creds.json
+*app-creds.json
