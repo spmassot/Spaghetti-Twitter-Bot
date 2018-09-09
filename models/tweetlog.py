@@ -1,3 +1,4 @@
+from os import getenv
 from pynamodb.models import Model
 from pynamodb.attributes import NumberAttribute
 
@@ -5,7 +6,7 @@ from pynamodb.attributes import NumberAttribute
 class TweetLog(Model):
     """A snapshot of the most recent tweet."""
     class Meta:
-        table_name = 'tweet_log'
+        table_name = getenv('LOG_TABLE')
         region = 'us-east-1'
         read_capacity_units = 1
         write_capacity_units = 1
